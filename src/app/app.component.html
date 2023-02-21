@@ -1,1 +1,27 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+    <button mat-icon-button  (click)="isMenuOpened = !isMenuOpened">
+        <mat-icon>menu</mat-icon>
+      </button>
+    <span>{{title}}</span>
+    <span class="spacer"></span>
+    <button mat-icon-button>
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>share</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav mode="side" [(opened)]="isMenuOpened">
+        <mat-list>
+            <mat-list-item>
+                <a routerLink="/home">Home</a>
+                <a routerLink="/home">Home</a>
+                <a routerLink="/home">Home</a>
+            </mat-list-item>
+        </mat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

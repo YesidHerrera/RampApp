@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ConnectionService, ConnectionState } from 'ng-connection-service';
-import { Subscription, tap } from 'rxjs';
+import { Subscription } from 'rxjs';
+import { ConnectionStatusService } from './services/connection-status.service';
 
 @Component({
   selector: 'app-root',
@@ -9,30 +9,22 @@ import { Subscription, tap } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'RampApp';
-  status!: string;
-  currentState!: ConnectionState;
-  subscription = new Subscription();
+  isMenuOpened = false;
+  isOnline = false;
+  connectionSubscription$?: Subscription;
+  
 
-  constructor(private connectionService: ConnectionService){}
+  constructor(private connectionStatusService: ConnectionStatusService){
+  }
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.connectionService.monitor().pipe(
-        tap((newState: ConnectionState) => {
-          this.currentState = newState;
-
-          if (this.currentState.hasNetworkConnection) {
-            this.status = 'ONLINE';
-          } else {
-            this.status = 'OFFLINE';
-          }
-        })
-      ).subscribe()
-    );
+    this.connectionSubscription$ = this.connectionStatusService.getOnlineStatus$().subscribe((isOnline: boolean) => {
+      this.isOnline = isOnline;
+    });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.connectionSubscription$?.unsubscribe();
   }
 
 }
