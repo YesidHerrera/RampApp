@@ -1,27 +1,51 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button  (click)="isMenuOpened = !isMenuOpened">
-        <mat-icon>menu</mat-icon>
-      </button>
-    <span>{{title}}</span>
-    <span class="spacer"></span>
-    <button mat-icon-button>
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>share</mat-icon>
-    </button>
-</mat-toolbar>
-<mat-sidenav-container>
-    <mat-sidenav mode="side" [(opened)]="isMenuOpened">
-        <mat-list>
-            <mat-list-item>
-                <a routerLink="/home">Home</a>
-                <a routerLink="/home">Home</a>
-                <a routerLink="/home">Home</a>
-            </mat-list-item>
-        </mat-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<div style="display: flex; flex-direction: column; height: 100vh;">
+        <mat-toolbar color="primary">
+            <button mat-icon-button  (click)="isMenuOpened = !isMenuOpened">
+                <mat-icon>menu</mat-icon>
+              </button>
+            <span>{{title}}</span>
+            <span class="spacer"></span>
+            <button mat-icon-button>
+              <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>information</mat-icon>
+            </button>
+        </mat-toolbar>
+        <mat-sidenav-container>
+            <mat-sidenav mode="side" [(opened)]="isMenuOpened">
+                <mat-list>
+                    <mat-list-item>
+                        <a routerLink="/home">Home</a>
+                        <a routerLink="/home">Home</a>
+                        <a routerLink="/home">Home</a>
+                    </mat-list-item>
+                </mat-list>
+            </mat-sidenav>
+            <mat-sidenav-content>
+                <router-outlet></router-outlet>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    <mat-tab-group headerPosition="below">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon color="primary" class="example-tab-icon">dashboard</mat-icon>
+            </ng-template>
+            <router-outlet></router-outlet>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <button mat-mini-fab matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon">
+                    <mat-icon>add</mat-icon>
+                  </button>
+            </ng-template>
+            <router-outlet></router-outlet>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon color="primary" class="example-tab-icon">settings</mat-icon>
+            </ng-template>
+            <router-outlet></router-outlet>
+        </mat-tab>
+    </mat-tab-group>
+</div>
