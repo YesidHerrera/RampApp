@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ConnectionServiceModule } from 'ng-connection-service';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,6 @@ import { ConnectionServiceModule } from 'ng-connection-service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ConnectionServiceModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
