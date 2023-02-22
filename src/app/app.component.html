@@ -1,5 +1,5 @@
 <div style="display: flex; flex-direction: column; height: 100vh;">
-        <mat-toolbar color="primary">
+        <mat-toolbar [color]="colorTheme">
             <button mat-icon-button  (click)="isMenuOpened = !isMenuOpened">
                 <mat-icon>menu</mat-icon>
               </button>
@@ -16,7 +16,7 @@
             <mat-sidenav mode="side" [(opened)]="isMenuOpened">
                 <mat-list>
                     <mat-list-item>
-                        <a routerLink="/home">Home</a>
+                        <a routerLink="/dashboard">Dashboard</a>
                         <a routerLink="/home">Home</a>
                         <a routerLink="/home">Home</a>
                     </mat-list-item>
@@ -26,16 +26,23 @@
                 <router-outlet></router-outlet>
             </mat-sidenav-content>
         </mat-sidenav-container>
-    <mat-tab-group headerPosition="below">
+    <mat-tab-group headerPosition="below" *ngIf="isSmallSize">
         <mat-tab>
             <ng-template mat-tab-label>
-                <mat-icon color="primary" class="example-tab-icon">dashboard</mat-icon>
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <mat-icon [color]="colorTheme">dashboard</mat-icon>
+                    </div>
+                    <div class="flex-item">
+                        <span>Dashboard</span>
+                    </div>
+                </div>
             </ng-template>
             <router-outlet></router-outlet>
         </mat-tab>
         <mat-tab>
             <ng-template mat-tab-label>
-                <button mat-mini-fab matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon">
+                <button mat-mini-fab matTooltip="Primary" [color]="colorTheme">
                     <mat-icon>add</mat-icon>
                   </button>
             </ng-template>
@@ -43,7 +50,14 @@
         </mat-tab>
         <mat-tab>
             <ng-template mat-tab-label>
-                <mat-icon color="primary" class="example-tab-icon">settings</mat-icon>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <mat-icon [color]="colorTheme">settings</mat-icon>
+                        </div>
+                        <div class="flex-item">
+                            <span>Settings</span>
+                        </div>
+                    </div>
             </ng-template>
             <router-outlet></router-outlet>
         </mat-tab>
